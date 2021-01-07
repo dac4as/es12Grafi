@@ -3,10 +3,7 @@
  */
 package it.unicam.cs.asdl2021.es12;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Implementazione della classe astratta {@code Graph<L>} che realizza un grafo
@@ -59,14 +56,18 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public int nodeCount() {
-        return this.adjacentLists.size();
+        return this.adjacentLists.keySet().size();
     }
 
     @Override
     public int edgeCount() {
+        if(this.getEdges()==null) return 0;
         int count = 0;
-        for (GraphNode<L> v: this.adjacentLists.keySet()) {
-            count += this.adjacentLists.get(v).size();
+        for (GraphNode<L> keyNode: this.getNodes()) {
+            for(GraphEdge<L> e : this.getEdges())
+            {
+                count++;
+            }
         }
         if (!isDirected()) {
             count = count / 2;
@@ -118,10 +119,12 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphNode<L> getNodeOf(L label) {
+        if(label==null) throw new NullPointerException("Etichetta nulla");
         Set<GraphNode<L>> setNodes = this.getNodes();
+        GraphNode<L> nl = new GraphNode<>(label);
         for(GraphNode<L> node : setNodes)
         {
-            if (node.equals(label))
+            if (node.equals(nl))//l'obj da passare a equals è il nodo che ha label
                 return node;
         }
         return null;
@@ -195,18 +198,16 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
             setEdges.addAll(this.getEdgesOf(keyNode));
         }
         return setEdges;
+        //Collection<Set<GraphEdge<L>>> getEdges = this.adjacentLists.values();
+        //return getEdges;
     }
 
     @Override
     public boolean addEdge(GraphEdge<L> edge) {
         if(edge==null) throw new NullPointerException();
         if(!this.containsNode(edge.getNode1()) || !this.containsNode(edge.getNode2()) || (this.isDirected() && !edge.isDirected()) || (!this.isDirected() && edge.isDirected())) throw new IllegalArgumentException();
-        if(this.getEdges().add(edge))
-        {
-            this.getEdges().add(edge);
-            return true;
-        }
-        else return false;
+
+        return this.getEdgesOf(edge.getNode1()).add(edge);
     }
 
     @Override
@@ -219,7 +220,15 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
     public boolean containsEdge(GraphEdge<L> edge) {
         if(edge==null) throw new NullPointerException();
         if(!this.containsNode(edge.getNode1()) || !this.containsNode(edge.getNode2())) throw new IllegalArgumentException();
-        return this.getEdges().contains(edge);
+        //return this.getEdges().contains(edge);
+
+        Set<GraphEdge<L>> edges = this.getEdgesOf(edge.getNode1());
+        for(GraphEdge<L> e : edges)
+        {
+            if(e.getNode2().equals(edge.getNode2()))
+                return true;
+        }
+        return false;
     }
 
     @Override
