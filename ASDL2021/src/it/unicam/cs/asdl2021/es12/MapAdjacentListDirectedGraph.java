@@ -64,13 +64,7 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
         if(this.getEdges()==null) return 0;
         int count = 0;
         for (GraphNode<L> keyNode: this.getNodes()) {
-            for(GraphEdge<L> e : this.getEdges())
-            {
-                count++;
-            }
-        }
-        if (!isDirected()) {
-            count = count / 2;
+            count += this.adjacentLists.get(keyNode).size();
         }
         return count;
     }
