@@ -48,7 +48,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
      */
     private final Map<GraphNode<L>, Set<GraphEdge<L>>> adjacentLists;
 
-    private int edgesNum;
 
     /**
      * Crea un grafo vuoto.
@@ -56,7 +55,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
     public MapAdjacentListDirectedGraph() {
         // Inizializza la mappa con la mappa vuota
         this.adjacentLists = new HashMap<GraphNode<L>, Set<GraphEdge<L>>>();
-        edgesNum=0;
     }
 
     @Override
@@ -66,13 +64,19 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public int edgeCount() {
-        return this.edgesNum;
+        int count = 0;
+        for (GraphNode<L> v: this.adjacentLists.keySet()) {
+            count += this.adjacentLists.get(v).size();
+        }
+        if (!isDirected()) {
+            count = count / 2;
+        }
+        return count;
     }
 
     @Override
     public void clear() {
         this.adjacentLists.clear();
-        this.edgesNum=0;
     }
 
     @Override
@@ -92,7 +96,7 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
         if(this.containsNode(node))
             return false;
         else{
-                this.adjacentLists.put(node, null);//aggiunta una nuova "riga" all'hashmap, non ci sono valori associati al nuovo nodo (archi)
+                this.adjacentLists.put(node, new HashSet<GraphEdge<L>>());//aggiunta una nuova "riga" all'hashmap, non ci sono valori associati al nuovo nodo (archi)
                 return true;
             }
     }
@@ -199,7 +203,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
         if(!this.containsNode(edge.getNode1()) || !this.containsNode(edge.getNode2()) || (this.isDirected() && !edge.isDirected()) || (!this.isDirected() && edge.isDirected())) throw new IllegalArgumentException();
         if(this.getEdges().add(edge))
         {
-            edgesNum++;
             this.getEdges().add(edge);
             return true;
         }

@@ -1,17 +1,17 @@
 package it.unicam.cs.asdl2021.es12;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-class MapAdjacentListDirectedGraphTest {
+public class MapAdjacentListDirectedGraphTest {
 
     @Test
-    final void testNodeCount() {
+    public final void testNodeCount() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertEquals(0, g.nodeCount());
         g.addNode(new GraphNode<String>("s"));
@@ -21,7 +21,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testEdgeCount() {
+    public final void testEdgeCount() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertEquals(0, g.edgeCount());
         GraphNode<String> ns = new GraphNode<String>("s");
@@ -42,7 +42,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testClear() {
+    public final void testClear() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertTrue(g.isEmpty());
         GraphNode<String> ns = new GraphNode<String>("s");
@@ -58,13 +58,13 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testIsDirected() {
+    public final void testIsDirected() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertTrue(g.isDirected());
     }
 
     @Test
-    final void testGetNodes() {
+    public final void testGetNodes() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         Set<GraphNode<String>> nodes = g.getNodes();
         assertTrue(nodes.isEmpty());
@@ -86,7 +86,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testAddNode() {
+    public final void testAddNode() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertThrows(NullPointerException.class, () -> g.addNode(null));
         GraphNode<String> ns = new GraphNode<String>("s");
@@ -101,7 +101,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testContainsNode() {
+    public final void testContainsNode() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertThrows(NullPointerException.class, () -> g.containsNode(null));
         GraphNode<String> ns = new GraphNode<String>("s");
@@ -112,7 +112,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testGetNodeOf() {
+    public final void testGetNodeOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertThrows(NullPointerException.class, () -> g.getNodeOf(null));
         GraphNode<String> ns = new GraphNode<String>("s");
@@ -129,7 +129,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testGetAdjacentNodesOf() {
+    public final void testGetAdjacentNodesOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertThrows(NullPointerException.class,
                 () -> g.getAdjacentNodesOf(null));
@@ -156,7 +156,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testGetPredecessorNodesOf() {
+    public final void testGetPredecessorNodesOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertThrows(NullPointerException.class,
                 () -> g.getPredecessorNodesOf(null));
@@ -205,7 +205,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testGetEdges() {
+    public final void testGetEdges() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
@@ -244,7 +244,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testAddEdge() {
+    public final void testAddEdge() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertThrows(NullPointerException.class,
                 () -> g.addEdge(null));
@@ -264,7 +264,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testContainsEdge() {
+    public final void testContainsEdge() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertThrows(NullPointerException.class,
                 () -> g.containsEdge(null));
@@ -283,7 +283,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testGetEdgesOf() {
+    public final void testGetEdgesOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
@@ -329,7 +329,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testGetIngoingEdgesOf() {
+    public final void testGetIngoingEdgesOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
@@ -375,13 +375,13 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testMapAdjacentListDirectedGraph() {
+    public final void testMapAdjacentListDirectedGraph() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertTrue(g.isEmpty());
     }
 
     @Test
-    final void testSize() {
+    public final void testSize() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertTrue(g.size() == 0);
         GraphNode<String> ns = new GraphNode<String>("s");
@@ -407,7 +407,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testIsEmpty() {
+    public final void testIsEmpty() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         assertTrue(g.isEmpty());
         GraphNode<String> ns = new GraphNode<String>("s");
@@ -418,7 +418,7 @@ class MapAdjacentListDirectedGraphTest {
     }
 
     @Test
-    final void testGetDegreeOf() {
+    public final void testGetDegreeOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
